@@ -137,6 +137,7 @@ LIBZCASH_H = \
   zcash/address/sprout.hpp \
   zcash/address/zip32.h \
   zcash/JoinSplit.hpp \
+  zcash/MMR.hpp \
   zcash/Note.hpp \
   zcash/prf.h \
   zcash/Proof.hpp \
@@ -566,6 +567,7 @@ libzcash_a_SOURCES = \
   zcash/address/sprout.cpp \
   zcash/address/zip32.cpp \
   zcash/JoinSplit.cpp \
+  zcash/MMR.cpp \
   zcash/Proof.cpp \
   zcash/Note.cpp \
   zcash/prf.cpp \
