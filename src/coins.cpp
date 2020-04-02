@@ -472,51 +472,51 @@ void CCoinsViewCache::PushHistoryNode(uint32_t epochId, const HistoryNode node) 
 void CCoinsViewCache::PopHistoryNode(uint32_t epochId) {
     auto treeLength = GetHistoryLength(epochId);
     HistoryCache& historyCache = SelectHistoryCache(epochId);
-
-    // elementary pops near the head of tree
-    if (treeLength == 0) {
-        // Caller is not expected to pop from empty tree! Caller should
-        // switch to previous epoch and pop history from there.
-        throw std::runtime_error("popping hisory node from empty history");
-    } else if (treeLength == 1) {
-        // Just resetting tree to empty
-        historyCache.Truncate(0);
-        historyCache.root = uint256();
-        return;
-    } else if (treeLength == 3) {
-        historyCache.Truncate(1);
-        uint256 newRoot;
-        if (librustzcash_mmr_hash_node(
-            epochId,
-            libzcash::LeafToEntry(GetHistoryAt(epochId, 0)).data(),
-            newRoot.begin()
-        ) == 0) {
-            historyCache.root = newRoot;
-        } else {
-            throw std::runtime_error("hasing node failed");
-        }
-    }
-
-    std::vector<HistoryEntry> entries;
-    std::vector<uint32_t> entry_indices;
-
-    uint32_t peak_count = PreloadHistoryTree(epochId, true, entries, entry_indices);
-
     uint256 newRoot;
 
-    uint32_t numberOfDeletes = librustzcash_mmr_delete(
-        epochId,
-        treeLength,
-        entry_indices.data(),
-        entries.data()->data(),
-        peak_count,
-        entries.size() - peak_count,
-        newRoot.begin()
-    );
+    // elementary pops near the head of tree
+    switch (treeLength) {
+        case 0:
+            // Caller is not expected to pop from empty tree! Caller should
+            // switch to previous epoch and pop history from there.
+            throw std::runtime_error("popping hisory node from empty history");
+        case 1:
+            // Just resetting tree to empty
+            historyCache.Truncate(0);
+            historyCache.root = uint256();
+            return;
+        case 3:
+            historyCache.Truncate(1);
+            if (librustzcash_mmr_hash_node(
+                epochId,
+                libzcash::LeafToEntry(GetHistoryAt(epochId, 0)).data(),
+                newRoot.begin()
+            ) == 0) {
+                historyCache.root = newRoot;
+            } else {
+                throw std::runtime_error("hasing node failed");
+            }
+        default:
+            std::vector<HistoryEntry> entries;
+            std::vector<uint32_t> entry_indices;
 
-    historyCache.Truncate(historyCache.length - numberOfDeletes);
+            uint32_t peak_count = PreloadHistoryTree(epochId, true, entries, entry_indices);
 
-    historyCache.root = newRoot;
+            uint32_t numberOfDeletes = librustzcash_mmr_delete(
+                epochId,
+                treeLength,
+                entry_indices.data(),
+                entries.data()->data(),
+                peak_count,
+                entries.size() - peak_count,
+                newRoot.begin()
+            );
+
+            historyCache.Truncate(historyCache.length - numberOfDeletes);
+
+            historyCache.root = newRoot;
+            return;
+    }
 }
 
 template<typename Tree, typename Cache, typename CacheEntry>
