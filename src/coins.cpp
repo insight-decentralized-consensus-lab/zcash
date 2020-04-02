@@ -497,13 +497,14 @@ void CCoinsViewCache::PopHistoryNode(uint32_t epochId) {
             // node.
             if (librustzcash_mmr_hash_node(
                 epochId,
-                libzcash::LeafToEntry(GetHistoryAt(epochId, 0)).data(),
+                GetHistoryAt(epochId, 0).data(),
                 newRoot.begin()
             ) != 0) {
                 throw std::runtime_error("hashing node failed");
             }
             historyCache.Truncate(1);
             historyCache.root = newRoot;
+            return;
         default:
             std::vector<HistoryEntry> entries;
             std::vector<uint32_t> entry_indices;
