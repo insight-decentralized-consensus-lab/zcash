@@ -40,6 +40,7 @@ zcash_gtest_SOURCES += \
 	gtest/test_metrics.cpp \
 	gtest/test_miner.cpp \
 	gtest/test_pedersen_hash.cpp \
+	gtest/test_mmr.cpp \
 	gtest/test_pow.cpp \
 	gtest/test_random.cpp \
 	gtest/test_rpc.cpp \

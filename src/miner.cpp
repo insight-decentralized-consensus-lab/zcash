@@ -249,6 +249,7 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const MinerAddre
 
         SaplingMerkleTree sapling_tree;
         assert(view.GetSaplingAnchorAt(view.GetBestAnchor(SAPLING), sapling_tree));
+        auto chainHistoryRoot = view.GetHistoryRoot(consensusBranchId);
 
         // Priority order to process transactions
         list<COrphan> vOrphan; // list memory doesn't move
@@ -520,7 +521,13 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const MinerAddre
 
         // Fill in header
         pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
-        pblock->hashFinalSaplingRoot   = sapling_tree.root();
+        if (IsActivationHeight(nHeight, chainparams.GetConsensus(), Consensus::UPGRADE_HEARTWOOD)) {
+            pblock->hashLightClientRoot.SetNull();
+        } else if (chainparams.GetConsensus().NetworkUpgradeActive(nHeight, Consensus::UPGRADE_HEARTWOOD)) {
+            pblock->hashLightClientRoot = chainHistoryRoot;
+        } else {
+            pblock->hashLightClientRoot = sapling_tree.root();
+        }
         UpdateTime(pblock, chainparams.GetConsensus(), pindexPrev);
         pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock, chainparams.GetConsensus());
         pblock->nSolution.clear();
