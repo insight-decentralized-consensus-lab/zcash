@@ -99,7 +99,7 @@ HistoryEntry NodeToEntry(const HistoryNode node, uint32_t left, uint32_t right) 
     buf << right;
     buf << node;
 
-    std::copy(std::begin(buf), std::end(buf), std::begin(result));
+    std::copy(std::begin(buf), std::end(buf), result.bytes);
 
     return result;
 }
@@ -112,7 +112,7 @@ HistoryEntry LeafToEntry(const HistoryNode node) {
     buf << code;
     buf << node;
 
-    std::copy(std::begin(buf), std::end(buf), std::begin(result));
+    std::copy(std::begin(buf), std::end(buf), result.bytes);
 
     return result;
 }

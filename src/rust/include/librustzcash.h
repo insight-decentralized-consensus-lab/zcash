@@ -3,6 +3,13 @@
 
 #include <stdint.h>
 
+const int ENTRY_SERIALIZED_LENGTH = 180;
+typedef struct HistoryEntry {
+    unsigned char bytes[ENTRY_SERIALIZED_LENGTH];
+}  HistoryEntry;
+static_assert(sizeof(HistoryEntry) == ENTRY_SERIALIZED_LENGTH);
+static_assert(alignof(HistoryEntry) == 1);
+
 extern "C" {
 #ifdef WIN32
     typedef uint16_t codeunit;
@@ -312,7 +319,7 @@ extern "C" {
         uint32_t cbranch,
         uint32_t t_len,
         const uint32_t *ni_ptr,
-        const unsigned char *n_ptr,
+        const HistoryEntry *n_ptr,
         size_t p_len,
         const unsigned char *nn_ptr,
         unsigned char *rt_ret,
@@ -323,7 +330,7 @@ extern "C" {
         uint32_t cbranch,
         uint32_t t_len,
         const uint32_t *ni_ptr,
-        const unsigned char *n_ptr,
+        const HistoryEntry *n_ptr,
         size_t p_len,
         size_t e_len,
         unsigned char *rt_ret
