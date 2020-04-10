@@ -1757,6 +1757,50 @@ bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex, const Consensus
     return true;
 }
 
+void WriteBlockToCSV(const CBlock* pblock, const int height) {
+    double validated_time = static_cast<double>(GetTimeMillis())/(1000);
+
+    // Decode miner difficulty
+    arith_uint256 bnTarget;
+    bnTarget.SetCompact(pblock->nBits);
+
+    const char* block_format = "%d,%s,%s,%d,%d,%.3f\n";
+    CSVBlockPrintf(block_format,
+        height,
+        pblock->GetHash().ToString().c_str(),
+        bnTarget.ToString().c_str(),
+        pblock->vtx.size(),
+        std::time_t(pblock->nTime),
+        validated_time);
+}
+
+void WriteInvToCSV(const CInv* inv, const CNode* pfrom) {
+    double validated_time = static_cast<double>(GetTimeMillis())/(1000);
+
+    // Decode inv type
+    const char* inv_type = (inv->type == MSG_TX) ? "TX" : "BLOCK";
+
+    const char* inv_format = "%s,%s,%.3f\n";
+    CSVInvPrintf(inv_format,
+        inv->hash.ToString().c_str(),
+        pfrom->addr.ToStringIP().c_str(),
+        validated_time);
+}
+
+void WritePeerToCSV(const CNode* pfrom, uint64_t nNonce, int64_t nTime) {
+    double validated_time = static_cast<double>(GetTimeMillis())/(1000);
+
+    const char* peer_format = "%s,%d,%s,%d,%llu,%lld,%.3f\n";
+    CSVPeerPrintf(peer_format,
+        pfrom->addr.ToStringIP().c_str(),
+        pfrom->nVersion,
+        pfrom->strSubVer.c_str(),
+        pfrom->nStartingHeight,
+        (unsigned long long) pfrom->nServices,
+        (long long)nTime,
+        validated_time);
+}
+
 CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 {
     CAmount nSubsidy = 12.5 * COIN;
@@ -4127,6 +4171,9 @@ bool ProcessNewBlock(CValidationState& state, const CChainParams& chainparams, c
         if (pindex && pfrom) {
             mapBlockSource[pindex->GetBlockHash()] = pfrom->GetId();
         }
+        if (pindex != NULL) {
+            WriteBlockToCSV(pblock, pindex->nHeight);
+        }
         CheckBlockIndex(chainparams.GetConsensus());
         if (!ret)
             return error("%s: AcceptBlock FAILED", __func__);
@@ -5461,6 +5508,8 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         pfrom->fSuccessfullyConnected = true;
 
+        WritePeerToCSV(pfrom, nNonce, nTime);
+
         string remoteAddr;
         if (fLogIPs)
             remoteAddr = ", peeraddr=" + pfrom->addr.ToString();
@@ -5603,6 +5652,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             boost::this_thread::interruption_point();
             pfrom->AddInventoryKnown(inv);
 
+
             bool fAlreadyHave = AlreadyHave(inv);
             LogPrint("net", "got inv: %s  %s peer=%d\n", inv.ToString(), fAlreadyHave ? "have" : "new", pfrom->id);
 
@@ -5610,6 +5660,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 pfrom->AskFor(inv);
 
             if (inv.type == MSG_BLOCK) {
+                WriteInvToCSV(&inv, pfrom);
                 UpdateBlockAvailability(pfrom->GetId(), inv.hash);
                 if (!fAlreadyHave && !fImporting && !fReindex && !mapBlocksInFlight.count(inv.hash)) {
                     // First request the headers preceding the announced block. In the normal fully-synced
