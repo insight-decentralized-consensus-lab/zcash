@@ -5400,6 +5400,17 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             return false;
         }
 
+        if (fSilent && ((pfrom->nServices & NODE_NETWORK) == 0))
+        {
+            // Silent Mode
+            // disconnect from peers with no block services
+            LogPrintf("peer=%d no block services; disconnecting\n", pfrom->id);
+            pfrom->PushMessage("reject", strCommand, REJECT_OBSOLETE,
+                               strprintf("Must provide block services"));
+            pfrom->fDisconnect = true;
+            return false;
+        }
+
         // Reject incoming connections from nodes that don't know about the current epoch
         const Consensus::Params& consensusParams = chainparams.GetConsensus();
         auto currentEpoch = CurrentEpoch(GetHeight(), consensusParams);
