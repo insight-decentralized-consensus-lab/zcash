@@ -457,7 +457,6 @@ public:
 
             // Silent Mode
             // Stop all outgoing inv, block, and tx messages
-            printf("Stoping message %s to %s\n", pszCommand, addr.ToStringIP().c_str());
             return;
         }
 
@@ -483,7 +482,6 @@ public:
 
             // Silent Mode
             // Stop all outgoing inv, block, and tx messages
-            printf("Stoping message %s to %s\n", pszCommand, addr.ToStringIP().c_str());
             return;
         }
 
@@ -510,7 +508,6 @@ public:
 
             // Silent Mode
             // Stop all outgoing inv, block, and tx messages
-            printf("Stoping message %s to %s\n", pszCommand, addr.ToStringIP().c_str());
             return;
         }
 
@@ -537,7 +534,6 @@ public:
 
             // Silent Mode
             // Stop all outgoing inv, block, and tx messages
-            printf("Stoping message %s to %s\n", pszCommand, addr.ToStringIP().c_str());
             return;
         }
 
@@ -564,7 +560,6 @@ public:
 
             // Silent Mode
             // Stop all outgoing inv, block, and tx messages
-            printf("Stoping message %s to %s\n", pszCommand, addr.ToStringIP().c_str());
             return;
         }
 
@@ -591,7 +586,6 @@ public:
 
             // Silent Mode
             // Stop all outgoing inv, block, and tx messages
-            printf("Stoping message %s to %s\n", pszCommand, addr.ToStringIP().c_str());
             return;
         }
 
@@ -618,7 +612,6 @@ public:
 
             // Silent Mode
             // Stop all outgoing inv, block, and tx messages
-            printf("Stoping message %s to %s\n", pszCommand, addr.ToStringIP().c_str());
             return;
         }
 
@@ -645,7 +638,6 @@ public:
 
             // Silent Mode
             // Stop all outgoing inv, block, and tx messages
-            printf("Stoping message %s to %s\n", pszCommand, addr.ToStringIP().c_str());
             return;
         }
 
@@ -672,7 +664,6 @@ public:
 
             // Silent Mode
             // Stop all outgoing inv, block, and tx messages
-            printf("Stoping message %s to %s\n", pszCommand, addr.ToStringIP().c_str());
             return;
         }
 
@@ -699,7 +690,6 @@ public:
 
             // Silent Mode
             // Stop all outgoing inv, block, and tx messages
-            printf("Stoping message %s to %s\n", pszCommand, addr.ToStringIP().c_str());
             return;
         }
 
