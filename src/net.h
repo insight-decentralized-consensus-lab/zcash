@@ -453,10 +453,10 @@ public:
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
-             pszCommand == "tx")) {
+             pszCommand == "tx" ||
+             pszCommand == "headers")) {
 
             // Silent Mode
-            // Stop all outgoing inv, block, and tx messages
             return;
         }
 
@@ -478,10 +478,10 @@ public:
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
-             pszCommand == "tx")) {
+             pszCommand == "tx" ||
+             pszCommand == "headers")) {
 
             // Silent Mode
-            // Stop all outgoing inv, block, and tx messages
             return;
         }
 
@@ -504,10 +504,10 @@ public:
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
-             pszCommand == "tx")) {
+             pszCommand == "tx" ||
+             pszCommand == "headers")) {
 
             // Silent Mode
-            // Stop all outgoing inv, block, and tx messages
             return;
         }
 
@@ -530,10 +530,10 @@ public:
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
-             pszCommand == "tx")) {
+             pszCommand == "tx" ||
+             pszCommand == "headers")) {
 
             // Silent Mode
-            // Stop all outgoing inv, block, and tx messages
             return;
         }
 
@@ -556,10 +556,10 @@ public:
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
-             pszCommand == "tx")) {
+             pszCommand == "tx" ||
+             pszCommand == "headers")) {
 
             // Silent Mode
-            // Stop all outgoing inv, block, and tx messages
             return;
         }
 
@@ -582,10 +582,10 @@ public:
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
-             pszCommand == "tx")) {
+             pszCommand == "tx" ||
+             pszCommand == "headers")) {
 
             // Silent Mode
-            // Stop all outgoing inv, block, and tx messages
             return;
         }
 
@@ -608,10 +608,10 @@ public:
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
-             pszCommand == "tx")) {
+             pszCommand == "tx" ||
+             pszCommand == "headers")) {
 
             // Silent Mode
-            // Stop all outgoing inv, block, and tx messages
             return;
         }
 
@@ -634,10 +634,10 @@ public:
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
-             pszCommand == "tx")) {
+             pszCommand == "tx" ||
+             pszCommand == "headers")) {
 
             // Silent Mode
-            // Stop all outgoing inv, block, and tx messages
             return;
         }
 
@@ -660,10 +660,10 @@ public:
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
-             pszCommand == "tx")) {
+             pszCommand == "tx" ||
+             pszCommand == "headers")) {
 
             // Silent Mode
-            // Stop all outgoing inv, block, and tx messages
             return;
         }
 
@@ -686,10 +686,10 @@ public:
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
-             pszCommand == "tx")) {
+             pszCommand == "tx" ||
+             pszCommand == "headers")) {
 
             // Silent Mode
-            // Stop all outgoing inv, block, and tx messages
             return;
         }
 
