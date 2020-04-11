@@ -450,11 +450,14 @@ public:
 
     void PushMessage(const char* pszCommand)
     {
+        // NOTE: changes here must be replicated
+        // in all 10 PushMessage functions
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
              pszCommand == "tx" ||
-             pszCommand == "headers")) {
+             pszCommand == "headers" ||
+             pszCommand == "addr")) {
 
             // Silent Mode
             return;
@@ -475,11 +478,14 @@ public:
     template<typename T1>
     void PushMessage(const char* pszCommand, const T1& a1)
     {
+        // NOTE: changes here must be replicated
+        // in all 10 PushMessage functions
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
              pszCommand == "tx" ||
-             pszCommand == "headers")) {
+             pszCommand == "headers" ||
+             pszCommand == "addr")) {
 
             // Silent Mode
             return;
@@ -501,11 +507,14 @@ public:
     template<typename T1, typename T2>
     void PushMessage(const char* pszCommand, const T1& a1, const T2& a2)
     {
+        // NOTE: changes here must be replicated
+        // in all 10 PushMessage functions
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
              pszCommand == "tx" ||
-             pszCommand == "headers")) {
+             pszCommand == "headers" ||
+             pszCommand == "addr")) {
 
             // Silent Mode
             return;
@@ -527,11 +536,14 @@ public:
     template<typename T1, typename T2, typename T3>
     void PushMessage(const char* pszCommand, const T1& a1, const T2& a2, const T3& a3)
     {
+        // NOTE: changes here must be replicated
+        // in all 10 PushMessage functions
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
              pszCommand == "tx" ||
-             pszCommand == "headers")) {
+             pszCommand == "headers" ||
+             pszCommand == "addr")) {
 
             // Silent Mode
             return;
@@ -553,11 +565,14 @@ public:
     template<typename T1, typename T2, typename T3, typename T4>
     void PushMessage(const char* pszCommand, const T1& a1, const T2& a2, const T3& a3, const T4& a4)
     {
+        // NOTE: changes here must be replicated
+        // in all 10 PushMessage functions
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
              pszCommand == "tx" ||
-             pszCommand == "headers")) {
+             pszCommand == "headers" ||
+             pszCommand == "addr")) {
 
             // Silent Mode
             return;
@@ -579,11 +594,14 @@ public:
     template<typename T1, typename T2, typename T3, typename T4, typename T5>
     void PushMessage(const char* pszCommand, const T1& a1, const T2& a2, const T3& a3, const T4& a4, const T5& a5)
     {
+        // NOTE: changes here must be replicated
+        // in all 10 PushMessage functions
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
              pszCommand == "tx" ||
-             pszCommand == "headers")) {
+             pszCommand == "headers" ||
+             pszCommand == "addr")) {
 
             // Silent Mode
             return;
@@ -605,11 +623,14 @@ public:
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
     void PushMessage(const char* pszCommand, const T1& a1, const T2& a2, const T3& a3, const T4& a4, const T5& a5, const T6& a6)
     {
+        // NOTE: changes here must be replicated
+        // in all 10 PushMessage functions
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
              pszCommand == "tx" ||
-             pszCommand == "headers")) {
+             pszCommand == "headers" ||
+             pszCommand == "addr")) {
 
             // Silent Mode
             return;
@@ -631,11 +652,14 @@ public:
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
     void PushMessage(const char* pszCommand, const T1& a1, const T2& a2, const T3& a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7)
     {
+        // NOTE: changes here must be replicated
+        // in all 10 PushMessage functions
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
              pszCommand == "tx" ||
-             pszCommand == "headers")) {
+             pszCommand == "headers" ||
+             pszCommand == "addr")) {
 
             // Silent Mode
             return;
@@ -657,11 +681,14 @@ public:
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
     void PushMessage(const char* pszCommand, const T1& a1, const T2& a2, const T3& a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8)
     {
+        // NOTE: changes here must be replicated
+        // in all 10 PushMessage functions
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
              pszCommand == "tx" ||
-             pszCommand == "headers")) {
+             pszCommand == "headers" ||
+             pszCommand == "addr")) {
 
             // Silent Mode
             return;
@@ -683,11 +710,14 @@ public:
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
     void PushMessage(const char* pszCommand, const T1& a1, const T2& a2, const T3& a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9)
     {
+        // NOTE: changes here must be replicated
+        // in all 10 PushMessage functions
         if (fSilent &&
             (pszCommand == "inv" ||
              pszCommand == "block" ||
              pszCommand == "tx" ||
-             pszCommand == "headers")) {
+             pszCommand == "headers" ||
+             pszCommand == "addr")) {
 
             // Silent Mode
             return;
